@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <iostream.h>
+using namespace std;
+int main() 
+{ 
+const float GST=0.16,discount=0.10;
+int Pizza= 1500,Rice= 350,Spaghetti=500,Tea=30,Roast=500;
+float accountBalance=0,totalBill=0,finalBill=0,currentBill=0;
+char menu,membership,answer;
+cout<<endl<<endl<<"***** BILAN RESTAURANT "<<endl<<endl;
+cout<<"Enter Account Balance: ";
+cin>>accountBalance;
+cout<<endl<<"Do you have membership in our restaurant (y/n): ";
+cin>>membership;
+do {
+bool hasBalance=false;
+cout<<endl<<"=============Menu============="<<endl <<"1. Press '1' to Buy Pizza"<<endl <<"2. Press '2' to Buy Rice"<<endl <<"3. Press '3' to Buy Spaghetti"<<endl <<"4. Press '4' to Buy Tea"<<endl <<"5. Press '5' to Buy Roast"<<endl <<
+endl<<"Please select Items from the menu: ";
+cin>>menu; 
+switch(menu) 
+{ case '1': if (accountBalance>=(Pizza+PizzaGST)) { totalBill=Pizza; hasBalance=true; }
+//if (accountBalance>=(Pizza+PizzaGST))
+{ case '1' break;
+case '2': if (accountBalance>=(Rice+RiceGST)) { totalBill=Rice; hasBalance=true; }
+//if (accountBalance>=(Rice+RiceGST))
+{ case '2 break;
+case '3': if (accountBalance>=(Spaghetti+SpaghettiGST)) { totalBill=Spaghetti; hasBalance=true; }
+//if (accountBalance>=(Spaghetti+SpaghettiGST))
+{ case '3' break;
+case '4': if (accountBalance>=(Tea+TeaGST)) { totalBill=Tea; hasBalance=true; }
+//if (accountBalance>=(Tea+TeaGST))
+{ case '4' break;
+case '5': if (accountBalance>=(Roast+RoastGST)) { totalBill=Roast; hasBalance=true; } 
+//if (accountBalance>=(Roast+RoastGST))
+{ case '5' break; 
+default: cout<<endl<<"You entered a wrong number"<<endl; }
+//switch(menu)
+if(hasBalance==true) 
+{ if (tolower(membership)=='y')
+{
+finalBill+=totalBill+(totalBillGST)-(totalBilldiscount);
+currentBill=totalBill+(totalBillGST)-(totalBilldiscount); } 
+else { 
+finalBill+=totalBill+(totalBillGST);
+currentBill=totalBill+(totalBillGST); 
+} 
+//if (tolower(membership)=='y') accountBalance-=currentBill;
+cout<<endl<<"Final Bill = "<<finalBill<<endl;
+cout<<endl<<"Remaining Balance = "<<accountBalance<<endl; }
+//if(hasBalance==true) 
+else { cout<<endl<<"You don't have Sufficent Money"<<endl;
+hasBalance=false; }//end else cout<<endl<<"Do you want to continue (y/n): "; cin>>answer;
+}while (tolower(answer)=='y');
+cout<<endl<<"Your Final Bill is = "<<finalBill<<endl;
+cout<<endl<<"Remaining Balance = "<<accountBalance<<endl; 
+return 0;
+}
