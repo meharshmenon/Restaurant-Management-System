@@ -1,0 +1,98 @@
+#include <iostream>
+#include <iomanip>  // For setting decimal precision
+using namespace std;
+
+int main() 
+{ 
+    const float GST = 0.16, discount = 0.10;
+    int Pizza = 1500, Rice = 350, Spaghetti = 500, Tea = 30, Roast = 500;
+    float accountBalance = 0, totalBill = 0, finalBill = 0, currentBill = 0;
+    char menu, membership, answer;
+    
+    cout << endl << endl << "***** BILAN RESTAURANT " << endl << endl;
+    cout << "Enter Account Balance: ";
+    cin >> accountBalance;
+    
+    cout << endl << "Do you have membership in our restaurant (y/n): ";
+    cin >> membership;
+
+    do {
+        bool hasBalance = false;
+        cout << endl << "=============Menu=============" << endl;
+        cout << "1. Press '1' to Buy Pizza" << endl;
+        cout << "2. Press '2' to Buy Rice" << endl;
+        cout << "3. Press '3' to Buy Spaghetti" << endl;
+        cout << "4. Press '4' to Buy Tea" << endl;
+        cout << "5. Press '5' to Buy Roast" << endl << endl;
+        cout << "Please select Items from the menu: ";
+        cin >> menu;
+
+        switch(menu) 
+        { 
+            case '1': 
+                if (accountBalance >= (Pizza + Pizza * GST)) {
+                    totalBill = Pizza;
+                    hasBalance = true;
+                }
+                break;
+            case '2': 
+                if (accountBalance >= (Rice + Rice * GST)) {
+                    totalBill = Rice;
+                    hasBalance = true;
+                }
+                break;
+            case '3': 
+                if (accountBalance >= (Spaghetti + Spaghetti * GST)) {
+                    totalBill = Spaghetti;
+                    hasBalance = true;
+                }
+                break;
+            case '4': 
+                if (accountBalance >= (Tea + Tea * GST)) {
+                    totalBill = Tea;
+                    hasBalance = true;
+                }
+                break;
+            case '5': 
+                if (accountBalance >= (Roast + Roast * GST)) {
+                    totalBill = Roast;
+                    hasBalance = true;
+                }
+                break;
+            default: 
+                cout << endl << "You entered a wrong number" << endl;
+                break;
+        }
+
+        if (hasBalance) 
+        { 
+            float totalBillGST = totalBill * GST;
+            float totalBillDiscount = (tolower(membership) == 'y') ? totalBill * discount : 0;
+
+            if (tolower(membership) == 'y') {
+                finalBill += totalBill + totalBillGST - totalBillDiscount;
+                currentBill = totalBill + totalBillGST - totalBillDiscount;
+            } else { 
+                finalBill += totalBill + totalBillGST;
+                currentBill = totalBill + totalBillGST;
+            }
+
+            accountBalance -= currentBill;
+
+            cout << endl << "Current Bill = " << fixed << setprecision(2) << currentBill << endl;
+            cout << "Remaining Balance = " << fixed << setprecision(2) << accountBalance << endl;
+        } 
+        else {
+            cout << endl << "You don't have sufficient money" << endl;
+        }
+
+        cout << endl << "Do you want to continue (y/n): ";
+        cin >> answer;
+
+    } while (tolower(answer) == 'y');
+
+    cout << endl << "Your Final Bill is = " << fixed << setprecision(2) << finalBill << endl;
+    cout << "Remaining Balance = " << fixed << setprecision(2) << accountBalance << endl; 
+
+    return 0;
+}
